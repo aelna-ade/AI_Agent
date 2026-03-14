@@ -15,6 +15,12 @@ def main():
     model="gemini-2.5-flash", 
     contents="Why is Boot.dev such a great place to learn backend development? Use one paragraph maximum."
     )
+    if response.usage_metadata is None:
+        raise RuntimeError("Failed API request")
+    else: 
+        print("Prompt tokens: ",response.usage_metadata.prompt_token_count)
+        print("Response tokens: ", response.usage_metadata.candidates_token_count)
+        
     print(response.text)
 
 if __name__ == "__main__":
